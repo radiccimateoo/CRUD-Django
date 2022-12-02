@@ -56,6 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
+        #'C:/Users/SONY VAIO/Desktop/nuevo_desafio/proyecto/peliculas/templates/'
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

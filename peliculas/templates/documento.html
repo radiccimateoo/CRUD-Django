@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if form.errors %}
+    <!-- mostrar un mensaje mas lindo con bootstrap -->
+        <p>ERROR</p>
+    {% endif %}
+
+    <h1>Registro de persona</h1>
+
+    <form action="/guardarPersona/" method="POST">
+        {% csrf_token %}
+
+        {% if mensaje %}
+            <p>PERSONA REGISTRADA exitosamente!</p>
+        {% endif %}
+
+        {{ form }}
+
+        <button type="submit" class="btn btn-success">Registrar</button>
+
+    </form>
+
+</body>
+</html>
