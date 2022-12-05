@@ -1,31 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% if form.errors %}
-    <!-- mostrar un mensaje mas lindo con bootstrap -->
-        <p>ERROR</p>
-    {% endif %}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
-    <h1>Registro de persona</h1>
+{% block content %}
 
-    <form action="/guardarPersona/" method="POST">
+{% if form.errors %}
+<div class="alert alert-warning">Error al registrar persona</div>
+{% endif %}
+
+<br>
+<h1>Registro de persona</h1>
+
+<br>
+{% if mensaje %}
+<div class="alert alert-success"> Persona registrada exitosamente! </div>
+{% endif %}
+<br>
+
+<div class="container">
+    <form action="{% url 'guardar' %}" method="POST">
         {% csrf_token %}
 
-        {% if mensaje %}
-            <p>PERSONA REGISTRADA exitosamente!</p>
-        {% endif %}
-
-        {{ form }}
+        {{ form | crispy }}
 
         <button type="submit" class="btn btn-success">Registrar</button>
+        <a class="btn btn-primary" href="{% url 'listaPersonas' %}">Volver</a>
 
     </form>
+</div>
 
-</body>
-</html>
+{% endblock %}
