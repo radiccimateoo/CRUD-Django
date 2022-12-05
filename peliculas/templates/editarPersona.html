@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% if form.errors %}
+    <!-- mostrar un mensaje mas lindo con bootstrap -->
+    <p>ERROR</p>
+    {% endif %}
+
+    <h1>Actualziacion de persona</h1>
+
+    <form action="/actualizarPersona/{{persona.id}}" method="POST">
+        {% csrf_token %}
+
+        {% if mensaje %}
+            <p>persona actualizada exitosamente!</p>
+        {% endif %}
+
+        {{ form }}
+
+        <button type="submit" class="btn btn-success">Actualizar</button>
+        <a href="{% url 'listaPersonas' %}">Cancelar</a>
+
+    </form>
+</body>
+
+</html>
