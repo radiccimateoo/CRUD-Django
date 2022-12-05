@@ -24,7 +24,6 @@ class tablaPelicula(models.Model):
 class tablaPremio(models.Model):
     premio_ganador = models.CharField(max_length=200)
     cantidad_nominaciones = models.IntegerField()
-    cantidad_premios_ganados = models.IntegerField()
     pelicula = models.ForeignKey(tablaPelicula, models.CASCADE, blank=True, null=True)
 
     def __str__(self):

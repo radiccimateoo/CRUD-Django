@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<br>
+<h1>Lista Premios</h1>
+<br>
+
+{% if mensaje %}
+<div class="alert alert-success"> Premio borrado exitosamente! </div>
+{% endif %}
+<br>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Película</th>
+                <th scope="col">Nominaciones</th>
+                <th scope="col">Premio ganador</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for premio in premios %}
+            <tr>
+                <th scope="row"> {{ premio.id }} </th>
+                <td> {{ premio.pelicula }} </td>
+                <td> {{ premio.cantidad_nominaciones }} </td>
+                <td> {{ premio.premio_ganador }} </td>
+
+                <td> <a class="btn btn-warning" href="{% url 'editarPremio' premio.id %}">Editar</a> </td>
+                <td> <a class="btn btn-danger" href="{% url 'eliminarPremio' premio.id %}">Eliminar</a> </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{% url 'registrarPremio' %}">Nuevo Premio</a>
+</div>
+
+{% endblock %}
