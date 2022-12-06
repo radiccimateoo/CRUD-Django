@@ -33,7 +33,7 @@
                 <td> {{ persona.apellido }} </td>
                 <td> {{ persona.dni }} </td>
                 <td> {{ persona.nacimiento }} </td>
-                <td> {{ persona.sueldo_mensual }} </td>
+                <td> ${{ persona.sueldo_mensual }} </td>
 
                 <td> <a class="btn btn-warning" href="{% url 'editar' persona.id %}">Editar</a> </td>
                 <td> <a class="btn btn-danger" href="{% url 'eliminar' persona.id %}">Eliminar</a> </td>
@@ -43,6 +43,28 @@
     </table>
 
     <a class="btn btn-success" href="{% url 'registrar' %}">Nueva Persona</a>
+
 </div>
+
+<hr>
+<br>
+
+<div class="container">
+
+    <h4>Calcular y obtener datos de los sueldos de las personas</h4>
+    <br>
+    <a class="btn btn-success" href="{% url 'funcionesSueldos' %}">Realizar acciones</a>
+
+    <br>
+    <h3>Sueldo promedio: ${{ sueldo_promedio }}</h3>
+    <br>
+    <h3>Sueldo mas alto: ${{ sueldo_alto }}</h3>
+    <h5>Persona correspondiente: {{ datos_alto }}</h5>
+    <br>
+    <h3>Sueldo mas bajo: ${{ sueldo_bajo }}</h3>
+    <h5>Persona correspondiente: {{ datos_bajo }}</h5>
+    
+</div>
+
 
 {% endblock %}

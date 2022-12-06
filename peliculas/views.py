@@ -49,6 +49,44 @@ class personaView(HttpRequest):
         personas = tablaPersona.objects.all()
 
         return render(request, 'listaPersonas.html', {'personas': personas, 'mensaje':'ok'})
+    
+
+    def funciones_sueldos(request):
+        datos = tablaPersona.objects.all()
+        suma = 0
+        cantidad_sueldos = 0
+        persona_sueldo_bajo = None #verificar error
+        sueldo_alto = datos[0].sueldo_mensual
+        sueldo_bajo = datos[0].sueldo_mensual
+
+        # calcular el promedio de los sueldos
+        for sueldo in datos:
+            suma += sueldo.sueldo_mensual
+            cantidad_sueldos += 1
+
+        sueldo_promedio = suma / cantidad_sueldos
+
+        # calcular sueldo mas alto y obtener datos
+        for dato in datos:
+            if dato.sueldo_mensual > sueldo_alto:
+                sueldo_alto = dato.sueldo_mensual
+                persona_sueldo_alto = dato.nombre.capitalize(), dato.apellido.capitalize(), dato.dni
+        
+        # calcular sueldo mas bajo y obtener datos
+        for dato in datos:
+            if dato.sueldo_mensual < sueldo_bajo:
+                sueldo_bajo = dato.sueldo_mensual
+                persona_sueldo_bajo = dato.nombre.capitalize(), dato.apellido.capitalize(), dato.dni
+                
+
+        return render(request, 'listaPersonas.html', 
+            { 'sueldo_promedio': round(sueldo_promedio, 2),
+              'sueldo_alto': sueldo_alto,
+              'sueldo_bajo': sueldo_bajo,
+              'datos_alto':persona_sueldo_alto,
+              'datos_bajo':persona_sueldo_bajo
+            }
+        )
 
 
 class peliculaView(HttpRequest):
