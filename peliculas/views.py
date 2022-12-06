@@ -77,6 +77,8 @@ class personaView(HttpRequest):
             if dato.sueldo_mensual < sueldo_bajo:
                 sueldo_bajo = dato.sueldo_mensual
                 persona_sueldo_bajo = dato.nombre.capitalize(), dato.apellido.capitalize(), dato.dni
+        
+        diferencia = sueldo_alto - sueldo_bajo
                 
 
         return render(request, 'listaPersonas.html', 
@@ -84,9 +86,18 @@ class personaView(HttpRequest):
               'sueldo_alto': sueldo_alto,
               'sueldo_bajo': sueldo_bajo,
               'datos_alto':persona_sueldo_alto,
-              'datos_bajo':persona_sueldo_bajo
+              'datos_bajo':persona_sueldo_bajo,
+              'diferencia': diferencia,
             }
         )
+    
+    def sueldo_anual(request, id_persona):
+        datos = tablaPersona.objects.all()
+        sueldo = datos[id_persona].sueldo_mensual
+        sueldo_anual = sueldo * 12
+
+        return render(request, 'listaPersonas.html', {'anual', sueldo_anual})
+
 
 
 class peliculaView(HttpRequest):

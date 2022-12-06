@@ -11,6 +11,7 @@ urlpatterns = [
     path('actualizarPersona/<int:id_persona>', personaView.actulizarPersona, name='actualizar'),
     path('eliminarPersona/<int:id_persona>', personaView.eliminarPersona, name='eliminar'),
     path('funcionesSueldos/', personaView.funciones_sueldos, name='funcionesSueldos'),
+    path('anual/<int:id_persona>', personaView.funciones_sueldos, name='anual'),
 
 
     # PELICULAS
@@ -18,8 +19,8 @@ urlpatterns = [
     path('guardarPelicula/', peliculaView.procesarPelicula, name='guardarPelicula'),
     path('listaPeliculas/', peliculaView.listarPelicula, name='listaPeliculas'),
     path('editarPelicula/<int:id_pelicula>', peliculaView.editarPelicula, name='editarPelicula'),
-    path('actualizarPelicula/<int:id_persona>', peliculaView.actulizarPelicula, name='actualizarPelicula'),
-    path('eliminarPelicula/<int:id_persona>', peliculaView.eliminarPelicula, name='eliminarPelicula'),
+    path('actualizarPelicula/<int:id_pelicula>', peliculaView.actulizarPelicula, name='actualizarPelicula'),
+    path('eliminarPelicula/<int:id_pelicula>', peliculaView.eliminarPelicula, name='eliminarPelicula'),
 
 
     # PREMIOS

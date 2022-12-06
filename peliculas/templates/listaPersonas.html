@@ -35,8 +35,20 @@
                 <td> {{ persona.nacimiento }} </td>
                 <td> ${{ persona.sueldo_mensual }} </td>
 
-                <td> <a class="btn btn-warning" href="{% url 'editar' persona.id %}">Editar</a> </td>
+                <td> <a class="btn btn-warning" href="{% url 'editar' persona.id%}">Editar</a> </td>
                 <td> <a class="btn btn-danger" href="{% url 'eliminar' persona.id %}">Eliminar</a> </td>
+                <td> 
+
+                    <div class="dropdown">
+                        <a href="{% url 'anual' persona.id%}" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sueldo Anual
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li class="dropdown-item">  ${{ anual }} </li>
+                        </ul>
+                    </div>
+
+                </td>
             </tr>
             {% endfor %}
         </tbody>
@@ -63,8 +75,9 @@
     <br>
     <h3>Sueldo mas bajo: ${{ sueldo_bajo }}</h3>
     <h5>Persona correspondiente: {{ datos_bajo }}</h5>
+    <br>
+    <h3>Diferencia entre sueldo más alto y sueldo más bajo: ${{ sueldo_alto }} - ${{ sueldo_bajo }} = ${{ diferencia }}</h3>
     
 </div>
 
-
-{% endblock %}
+{% endblock %} 
