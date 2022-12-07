@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import personaView, peliculaView, premioView
+from .views import personaView, peliculaView, premioView, imagenesView
 
 urlpatterns = [
 
@@ -12,6 +12,7 @@ urlpatterns = [
     path('eliminarPersona/<int:id_persona>', personaView.eliminarPersona, name='eliminar'),
     path('funcionesSueldos/', personaView.funciones_sueldos, name='funcionesSueldos'),
     path('anual/<int:id_persona>', personaView.funciones_sueldos, name='anual'),
+    path('buscar/', personaView.filtrar, name='buscar'),
 
 
     # PELICULAS
@@ -30,5 +31,9 @@ urlpatterns = [
     path('editarPremio/<int:id_premio>', premioView.editarPremio, name='editarPremio'),
     path('actualizarPremio/<int:id_premio>', premioView.actulizarPremio, name='actualizarPremio'),
     path('eliminarPremio/<int:id_premio>', premioView.eliminarPremio, name='eliminarPremio'),
+
+
+    #EXTRAS
+    path('imagenes/', imagenesView.imagenes, name='imagenes'),
 
 ]

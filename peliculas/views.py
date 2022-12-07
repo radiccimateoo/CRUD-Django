@@ -81,7 +81,7 @@ class personaView(HttpRequest):
         diferencia = sueldo_alto - sueldo_bajo
                 
 
-        return render(request, 'listaPersonas.html', 
+        return render(request, 'sueldos.html', 
             { 'sueldo_promedio': round(sueldo_promedio, 2),
               'sueldo_alto': sueldo_alto,
               'sueldo_bajo': sueldo_bajo,
@@ -97,7 +97,16 @@ class personaView(HttpRequest):
         sueldo_anual = sueldo * 12
 
         return render(request, 'listaPersonas.html', {'anual', sueldo_anual})
+    
+    def filtrar(request):
+        # datos = tablaPersona.objects.all()
+        nombre = request.GET['nombre']
+        dni = request.GET['dni']
 
+        if nombre and dni:
+            encontrados = tablaPersona.objects.filter(nombre__icontains = nombre, dni__icontains = dni)
+
+            return render(request, 'buscar.html', {'encontrados':encontrados, 'nombre':nombre, 'dni':dni})
 
 
 class peliculaView(HttpRequest):
@@ -189,3 +198,9 @@ class premioView(HttpRequest):
         premios = tablaPremio.objects.all()
 
         return render(request, 'listaPremios.html', {'premios': premios, 'mensaje':'ok'})
+
+
+class imagenesView(HttpRequest):
+    def imagenes(request):
+        img = '<img src="/images/dos.jpg" alt="asdasdasdadd">'
+        return render(request, 'imagenes.html', {'img':img})

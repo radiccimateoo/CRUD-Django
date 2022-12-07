@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content%}
+
+<div class="container">
+    <br>
+    <h3>En esta sección se muestran cáclulos de sueldos y búsquedas según alguna condición</h3>
+    <br>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"> Sueldo promedio: ${{ sueldo_promedio }} </h5>
+            </div>
+        </a>
+
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"> Sueldo mas alto: ${{ sueldo_alto }} </h5>
+            </div>
+            <p class="mb-1"> Persona correspondiente: {{ datos_alto }} </p>
+        </a>
+
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"> Sueldo mas bajo: ${{ sueldo_bajo }} </h5>
+            </div>
+            <p class="mb-1"> Persona correspondiente: {{ datos_bajo }} </p>
+        </a>
+
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">
+                    Diferencia entre sueldo más alto y sueldo más bajo: ${{ sueldo_alto }} - ${{ sueldo_bajo }} = ${{ diferencia }}
+                </h5>
+            </div>
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

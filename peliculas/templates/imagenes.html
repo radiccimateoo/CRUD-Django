@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content%}
+
+<h1 class="text-center display-4 my-4">Galería de imágenes</h1>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+
+        <div class="card">
+            <img src="{% static 'img/uno.jpg' %}" class="card-img-top" alt="...">
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <img src="{% static 'img/dos.jpg' %}" class="card-img-top" alt="imagenes">
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <img src="{% static 'img/cuatro.jpg' %}" class="img-thumbnail" alt="imagenes">
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <img src="{% static 'img/cinco.jpg' %}" class="card-img-top" alt="imagenes">
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <img src="{% static 'img/seis.jpg' %}" class="img-thumbnail" alt="imagenes">
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <img src="{% static 'img/siete.jpg' %}" class="card-img-top" alt="imagenes">
+        </div>
+    </div>
+</div>
+
+{% endblock%}
