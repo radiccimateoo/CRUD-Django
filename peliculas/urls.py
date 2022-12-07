@@ -11,8 +11,13 @@ urlpatterns = [
     path('actualizarPersona/<int:id_persona>', personaView.actulizarPersona, name='actualizar'),
     path('eliminarPersona/<int:id_persona>', personaView.eliminarPersona, name='eliminar'),
     path('funcionesSueldos/', personaView.funciones_sueldos, name='funcionesSueldos'),
-    path('anual/<int:id_persona>', personaView.funciones_sueldos, name='anual'),
+    path('anual/<int:sueldo>', personaView.sueldo_anual, name='anual'),
     path('buscar/', personaView.filtrar, name='buscar'),
+    path('edadActual/<int:anio_nacimiento>', personaView.edadActual, name='edadActual'),
+    path('actualizarSueldo/<int:sueldo>', personaView.actualizarSueldo, name='actualizarSueldo'),
+    path('actualizarSueldoDiez/<int:sueldo>', personaView.actualizarSueldoDiez, name='actualizarSueldoDiez'),
+    path('actualizarSueldoQuince/<int:sueldo>', personaView.actualizarSueldoQuince, name='actualizarSueldoQuince'),
+    path('actualizarSueldoVeinte/<int:sueldo>', personaView.actualizarSueldoVeinte, name='actualizarSueldoVeinte'),
 
 
     # PELICULAS

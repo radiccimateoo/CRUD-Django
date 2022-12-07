@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="card container">
+    <h5 class="card-header">Edad Actual</h5>
+    <div class="card-body">
+        <h5 class="card-title">La edad actual es de {{ actual }} años</h5>
+        <a href=" {% url 'listaPersonas' %} " class="btn btn-primary">Volver</a>
+    </div>
+</div>
+
+{% endblock %}

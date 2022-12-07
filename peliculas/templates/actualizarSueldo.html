@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<!-- PUEDO EDITAR EL SUELDO PERO NO SE COMO ACTUALIZARLO PASANDO COMO PARAMETRO SU SUELDO -->
+
+<br>
+
+<div class="card container">
+    <div class="card-header">
+        Actualziación de sueldo
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Actualizar sueldo incrementandolo en un 10%</h5>
+        <p class="card-text">Su nuevo sueldo es ${{ actualizar }} / antes ${{ sueldo }}</p>
+        <a href="{% url 'actualizarSueldoDiez' 200 %}" class="btn btn-primary">Actualizar</a>
+        <a class="btn btn-danger" href="{% url 'listaPersonas' %}">Volver</a>
+    </div>
+</div>
+
+<br>
+
+<div class="card container">
+    <div class="card-header">
+        Actualziación de sueldo
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Actualizar sueldo incrementandolo en un 15% </h5>
+        <p class="card-text">Su nuevo sueldo es ${{ actualizar2 }} / antes ${{ sueldo }}</p>
+        <a href="{% url 'actualizarSueldoQuince' 200 %}" class="btn btn-primary">Actualizar</a>
+        <a class="btn btn-danger" href="{% url 'listaPersonas' %}">Volver</a>
+    </div>
+</div>
+
+<br>
+
+<div class="card container">
+    <div class="card-header">
+        Actualziación de sueldo 
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Actualizar sueldo incrementandolo en un 20%</h5>
+        <p class="card-text">Su nuevo sueldo es ${{ actualizar3 }} / antes ${{ sueldo }}</p>
+        <a href="{% url 'actualizarSueldoVeinte' 200 %}" class="btn btn-primary">Actualizar</a>
+        <a class="btn btn-danger" href="{% url 'listaPersonas' %}">Volver</a>
+    </div>
+</div>
+
+{% endblock %}

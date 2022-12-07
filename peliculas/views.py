@@ -4,6 +4,9 @@ from django.http import HttpRequest
 from .forms import formularioPersona, formularioPelicula, formularioPremio
 from .models import tablaPersona, tablaPelicula, tablaPremio
 
+
+import datetime
+
 # Create your views here.
 class personaView(HttpRequest):
 
@@ -24,6 +27,7 @@ class personaView(HttpRequest):
     def editarPersona(request, id_persona):
         persona = tablaPersona.objects.filter(id= id_persona).first()
         form = formularioPersona(instance= persona)
+
         
         return render(request, 'editarPersona.html', {'form':form, 'persona':persona})
 
@@ -90,16 +94,8 @@ class personaView(HttpRequest):
               'diferencia': diferencia,
             }
         )
-    
-    def sueldo_anual(request, id_persona):
-        datos = tablaPersona.objects.all()
-        sueldo = datos[id_persona].sueldo_mensual
-        sueldo_anual = sueldo * 12
 
-        return render(request, 'listaPersonas.html', {'anual', sueldo_anual})
-    
     def filtrar(request):
-        # datos = tablaPersona.objects.all()
         nombre = request.GET['nombre']
         dni = request.GET['dni']
 
@@ -107,6 +103,39 @@ class personaView(HttpRequest):
             encontrados = tablaPersona.objects.filter(nombre__icontains = nombre, dni__icontains = dni)
 
             return render(request, 'buscar.html', {'encontrados':encontrados, 'nombre':nombre, 'dni':dni})
+    
+    def sueldo_anual(request, sueldo):
+        anual = sueldo * 12
+    
+        return render(request, 'anual.html', {'anual':anual})
+    
+    def edadActual(request, anio_nacimiento):
+        fecha_atual = datetime.datetime.now()
+        edad_actual = fecha_atual.year - anio_nacimiento
+
+        return render(request, 'edadActual.html', {'actual': edad_actual})
+    
+
+    def actualizarSueldo(request, sueldo):
+        return render(request, 'actualizarSueldo.html', {'sueldo':sueldo})
+
+    def actualizarSueldoDiez(request, sueldo):
+        calculo = sueldo * 0.10
+        actualizar = sueldo + calculo
+
+        return render(request, 'actualizarSueldo.html', {'actualizar':actualizar, 'sueldo':sueldo})
+
+    def actualizarSueldoQuince(request, sueldo):
+        calculo = sueldo * 0.15
+        actualizar = sueldo + calculo
+
+        return render(request, 'actualizarSueldo.html', {'actualizar2': actualizar, 'sueldo':sueldo})
+    
+    def actualizarSueldoVeinte(request, sueldo):
+        calculo = sueldo * 0.20
+        actualizar = sueldo + calculo
+
+        return render(request, 'actualizarSueldo.html', {'actualizar3': actualizar, 'sueldo':sueldo})
 
 
 class peliculaView(HttpRequest):
@@ -201,6 +230,6 @@ class premioView(HttpRequest):
 
 
 class imagenesView(HttpRequest):
+
     def imagenes(request):
-        img = '<img src="/images/dos.jpg" alt="asdasdasdadd">'
-        return render(request, 'imagenes.html', {'img':img})
+        return render(request, 'imagenes.html')

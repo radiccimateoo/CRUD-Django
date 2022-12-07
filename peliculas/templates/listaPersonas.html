@@ -4,7 +4,7 @@
 {% block content %}
 
 <br>
-<h1>Lista Personas</h1>
+<h1 class="text-center display-4 my-4">Lista Personas</h1>
 <br>
 
 {% if mensaje %}
@@ -37,19 +37,9 @@
 
                 <td> <a class="btn btn-warning" href="{% url 'editar' persona.id%}">Editar</a> </td>
                 <td> <a class="btn btn-danger" href="{% url 'eliminar' persona.id %}">Eliminar</a> </td>
-                <td>
-
-                    <div class="dropdown">
-                        <a href="{% url 'anual' persona.id%}" class="btn btn-secondary dropdown-toggle" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Sueldo Anual
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-item"> ${{ anual }} </li>
-                        </ul>
-                    </div>
-
-                </td>
+                <td> <a href="{% url 'anual' persona.sueldo_mensual %}" class="btn btn-secondary">Sueldo Anual</a> </td>
+                <td> <a href="{% url 'edadActual' persona.nacimiento.year %}" class="btn btn-dark">Edad Actual</a></td>
+                <td> <a href="{% url 'actualizarSueldo' persona.sueldo_mensual %}" class="btn btn-dark">Actualziar Sueldo</a></td>
             </tr>
             {% endfor %}
         </tbody>
