@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content%}
+
+<br>
+<div class="container" style="display: flex; gap: 10px;">
+    {% for premio in premios %}
+    <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Consulta a tablas</div>
+        <div class="card-body">
+            <h5 class="card-title">Premio ganador y película</h5>
+            <h6 class="card-text"> {{ premio }} </h6>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+
+<br>
+<hr>
+
+<div class="container" style="display: flex; gap: 10px;">
+    {% for pelicula in peliculas %}
+    <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Consulta a tablas</div>
+        <div class="card-body">
+            <h5 class="card-title">Nombre de película y actor</h5>
+            <h6 class="card-text"> {{ pelicula }} </h6>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+
+
+{% endblock %}

@@ -40,5 +40,6 @@ urlpatterns = [
 
     #EXTRAS
     path('imagenes/', imagenesView.imagenes, name='imagenes'),
+    path('consulta/', personaView.consulta_join, name='consulta')
 
 ]

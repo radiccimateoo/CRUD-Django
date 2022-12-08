@@ -99,10 +99,19 @@ class personaView(HttpRequest):
         nombre = request.GET['nombre']
         dni = request.GET['dni']
 
+        if 'is_private' in request.GET:
+            is_private = request.GET['is_private']
+        else:
+            is_private = False
+        
+        print(is_private)
+
         if nombre and dni:
             encontrados = tablaPersona.objects.filter(nombre__icontains = nombre, dni__icontains = dni)
 
             return render(request, 'buscar.html', {'encontrados':encontrados, 'nombre':nombre, 'dni':dni})
+    
+
     
     def sueldo_anual(request, sueldo):
         anual = sueldo * 12
@@ -136,6 +145,24 @@ class personaView(HttpRequest):
         actualizar = sueldo + calculo
 
         return render(request, 'actualizarSueldo.html', {'actualizar3': actualizar, 'sueldo':sueldo})
+
+    def consulta_join(request):
+        pre = []
+        pel = []
+
+        premios = tablaPremio.objects.select_related('pelicula').all()
+        peliculas = tablaPelicula.objects.select_related('persona').all()
+
+        for premio in premios:
+            p = premio.premio_ganador, premio.pelicula.nombre_pelicula
+            pre.append(p)
+
+        for pelicula in peliculas:
+            p = pelicula.nombre_pelicula, pelicula.persona.nombre
+            pel.append(p)
+
+        return render(request, 'join.html', {'premios':pre, 'peliculas':pel})
+
 
 
 class peliculaView(HttpRequest):

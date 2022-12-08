@@ -12,14 +12,14 @@
 {% endif %}
 
 <br>
-<h1 class="text-center display-4 my-4">Actualziacion de persona</h1>
+<h1 class="text-center display-4 my-4">Actualización de premio</h1>
 <br>
 
 <div class="container">
     <form action="{% url 'actualizarPremio' premio.id %}" method="POST">
         {% csrf_token %}
 
-        {{ formPremio | crispy}}
+        {{ formPremio | crispy }}
 
         <button type="submit" class="btn btn-success">Actualizar</button>
         <a class="btn btn-danger" href="{% url 'listaPremios' %}">Cancelar</a>
