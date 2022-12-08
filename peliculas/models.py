@@ -16,6 +16,7 @@ class tablaPelicula(models.Model):
     nombre_pelicula = models.CharField(max_length=200)
     descripcion = models.CharField(max_length=200)
     genero = models.CharField(max_length=200)
+    clob = models.ImageField(upload_to='img', null=True)
     persona = models.ForeignKey(tablaPersona, models.CASCADE, blank=True, null=True)
 
     def __str__(self):
