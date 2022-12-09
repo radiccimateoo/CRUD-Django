@@ -59,7 +59,7 @@ class personaView(HttpRequest):
         datos = tablaPersona.objects.all()
         suma = 0
         cantidad_sueldos = 0
-        persona_sueldo_bajo = None #verificar error
+        persona_sueldo_bajo = '' #verificar error
         sueldo_alto = datos[0].sueldo_mensual
         sueldo_bajo = datos[0].sueldo_mensual
 
@@ -96,20 +96,19 @@ class personaView(HttpRequest):
         )
 
     def filtrar(request):
-        nombre = request.GET['nombre']
-        dni = request.GET['dni']
+        encontrados = ''
 
-        if 'is_private' in request.GET:
-            is_private = request.GET['is_private']
+        if 'nombre' in request.GET and 'dni' in request.GET:
+            nombre = request.GET['nombre']
+            dni = request.GET['dni']
+
         else:
-            is_private = False
+            nombre = ''
+            dni = 0
         
-        print(is_private)
-
-        if nombre and dni:
-            encontrados = tablaPersona.objects.filter(nombre__icontains = nombre, dni__icontains = dni)
-
-            return render(request, 'buscar.html', {'encontrados':encontrados, 'nombre':nombre, 'dni':dni})
+        encontrados = tablaPersona.objects.filter(nombre = nombre, dni = dni)
+    
+        return render(request, 'buscar.html', {'encontrados':encontrados, 'nombre':nombre, 'dni':dni})
     
 
     

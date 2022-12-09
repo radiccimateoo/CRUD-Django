@@ -12,11 +12,11 @@
         {% csrf_token%}
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Nomrbe</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nombre">
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nombre" required>
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">DNI</label>
-            <input type="number" class="form-control" id="exampleInputPassword1" name="dni">
+            <input type="number" class="form-control" id="exampleInputPassword1" name="dni" required>
         </div>
         <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
@@ -33,7 +33,7 @@
 
         <ul class="list-group">
             {% for persona in encontrados %}
-                <li class="list-group-item"> {{ persona }} </li>
+                <li class="list-group-item"> {{ persona.nombre }}, {{ persona.dni }} </li>
             {% endfor %}
         </ul>
 
