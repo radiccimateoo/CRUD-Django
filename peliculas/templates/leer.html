@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content%}
+
+<div class="container">
+    <h1 class="text-center display-4 my-4">Lectura de inserción de datos</h1>
+
+    {% for linea in archivo %}
+    <p> {{ linea }} </p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

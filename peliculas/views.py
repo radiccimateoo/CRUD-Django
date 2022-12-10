@@ -4,6 +4,7 @@ from django.http import HttpRequest
 from .forms import formularioPersona, formularioPelicula, formularioPremio
 from .models import tablaPersona, tablaPelicula, tablaPremio
 
+from .insertar import *
 
 import datetime
 
@@ -20,6 +21,9 @@ class personaView(HttpRequest):
         
         if persona.is_valid():
             persona.save()
+            
+            #insertar registros en el archivo.txt
+            insertar(persona.save())
             persona = formularioPersona()
         
         return render(request, 'registrarPersona.html', {'form':persona, 'mensaje':'ok'})
@@ -161,6 +165,11 @@ class personaView(HttpRequest):
             pel.append(p)
 
         return render(request, 'join.html', {'premios':pre, 'peliculas':pel})
+    
+    def leerInsert(request):
+        archivo = leer()
+        
+        return render(request, 'leer.html', {'archivo':archivo})
 
 
 

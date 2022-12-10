@@ -20,6 +20,7 @@ urlpatterns = [
     path('actualizarSueldoVeinte/<int:sueldo>', personaView.actualizarSueldoVeinte, name='actualizarSueldoVeinte'),
 
 
+
     # PELICULAS
     path('registrarPelicula/', peliculaView.registrarPelicula, name='registrarPelicula'),
     path('guardarPelicula/', peliculaView.procesarPelicula, name='guardarPelicula'),
@@ -41,6 +42,7 @@ urlpatterns = [
     #EXTRAS
     path('imagenes/', imagenesView.imagenes, name='imagenes'),
     path('consulta/', personaView.consulta_join, name='consulta'),
+    path('leer/', personaView.leerInsert, name='leer'),
     
 
 ]
