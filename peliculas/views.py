@@ -132,6 +132,8 @@ class personaView(HttpRequest):
         return render(request, 'actualizarSueldo.html', {'sueldo':sueldo})
 
     def actualizarSueldoDiez(request, sueldo):
+        s = tablaPersona.objects.get(sueldo_mensual=sueldo).sueldo_mensual
+        print('sueldo con get', s)
         calculo = sueldo * 0.10
         actualizar = sueldo + calculo
 
@@ -185,6 +187,7 @@ class peliculaView(HttpRequest):
         
         if pelicula.is_valid():
             pelicula.save()
+            insertar(pelicula.save())
             pelicula = formularioPelicula()
         
         return render(request, 'registrarPeliculas.html', {'formPelicula':pelicula, 'mensaje':'ok'})
@@ -230,6 +233,7 @@ class premioView(HttpRequest):
         
         if premio.is_valid():
             premio.save()
+            insertar(premio.save())
             premio = formularioPelicula()
         
         return render(request, 'registrarPremios.html', {'formPremio':premio, 'mensaje':'ok'})
