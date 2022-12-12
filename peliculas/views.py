@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpRequest
 
 from .forms import formularioPersona, formularioPelicula, formularioPremio
@@ -128,28 +128,26 @@ class personaView(HttpRequest):
         return render(request, 'edadActual.html', {'actual': edad_actual})
     
 
-    def actualizarSueldo(request, sueldo):
-        return render(request, 'actualizarSueldo.html', {'sueldo':sueldo})
+    def actualizarSueldo(request, persona, sueldo, porcentaje):
+        if porcentaje == 10:
+            calculo = sueldo * 0.10
+            final = sueldo + calculo
+            person = tablaPersona.objects.filter(id=persona).update(sueldo_mensual = final)
 
-    def actualizarSueldoDiez(request, sueldo):
-        s = tablaPersona.objects.get(sueldo_mensual=sueldo).sueldo_mensual
-        print('sueldo con get', s)
-        calculo = sueldo * 0.10
-        actualizar = sueldo + calculo
+        elif porcentaje == 15:
+            calculo = sueldo * 0.15
+            final = sueldo + calculo
+            person = tablaPersona.objects.filter(id=persona).update(sueldo_mensual = final)
 
-        return render(request, 'actualizarSueldo.html', {'actualizar':actualizar, 'sueldo':sueldo})
+        else:
+            if porcentaje == 20:
+                calculo = sueldo * 0.20
+                final = sueldo + calculo
+                person = tablaPersona.objects.filter(id=persona).update(sueldo_mensual = final)
+        
+        personas = tablaPersona.objects.all()
 
-    def actualizarSueldoQuince(request, sueldo):
-        calculo = sueldo * 0.15
-        actualizar = sueldo + calculo
-
-        return render(request, 'actualizarSueldo.html', {'actualizar2': actualizar, 'sueldo':sueldo})
-    
-    def actualizarSueldoVeinte(request, sueldo):
-        calculo = sueldo * 0.20
-        actualizar = sueldo + calculo
-
-        return render(request, 'actualizarSueldo.html', {'actualizar3': actualizar, 'sueldo':sueldo})
+        return render(request, 'listaPersonas.html', {'personas':personas})
 
     def consulta_join(request):
         pre = []
@@ -234,7 +232,7 @@ class premioView(HttpRequest):
         if premio.is_valid():
             premio.save()
             insertar(premio.save())
-            premio = formularioPelicula()
+            premio = formularioPremio()
         
         return render(request, 'registrarPremios.html', {'formPremio':premio, 'mensaje':'ok'})
 

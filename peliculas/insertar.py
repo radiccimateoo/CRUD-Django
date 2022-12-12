@@ -8,7 +8,6 @@ def insertar(registro):
 
     archivo.close()
 
-
     return dato_final
 
 def leer():

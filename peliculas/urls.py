@@ -14,10 +14,7 @@ urlpatterns = [
     path('anual/<int:sueldo>', personaView.sueldo_anual, name='anual'),
     path('buscar/', personaView.filtrar, name='buscar'),
     path('edadActual/<int:anio_nacimiento>', personaView.edadActual, name='edadActual'),
-    path('actualizarSueldo/<int:sueldo>', personaView.actualizarSueldo, name='actualizarSueldo'),
-    path('actualizarSueldoDiez/<int:sueldo>', personaView.actualizarSueldoDiez, name='actualizarSueldoDiez'),
-    path('actualizarSueldoQuince/<int:sueldo>', personaView.actualizarSueldoQuince, name='actualizarSueldoQuince'),
-    path('actualizarSueldoVeinte/<int:sueldo>', personaView.actualizarSueldoVeinte, name='actualizarSueldoVeinte'),
+    path('actualizarSueldo/<persona>/<int:sueldo>/<int:porcentaje>', personaView.actualizarSueldo, name='actualizarSueldo'),
 
 
 
