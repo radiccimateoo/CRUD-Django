@@ -3,8 +3,13 @@ import datetime
 def insertar(registro):
     archivo = open('insertBDD.txt', 'a')
 
-    fecha_hora = datetime.datetime.now()
-    dato_final = archivo.write(str(fecha_hora) + '\n' + str(registro) + '\n')
+    d = datetime.datetime.now()
+    fecha = str(d.day) + '/' + str(d.month) + '/' + str(d.year)
+    hora = str(d.hour) + ':' + str(d.minute) + ':' + str(d.second)
+
+    actual = [fecha + '--' + hora]
+
+    dato_final = archivo.write(str(actual) + '\t' + str(registro) + '\n')
 
     archivo.close()
 

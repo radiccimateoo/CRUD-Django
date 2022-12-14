@@ -15,6 +15,7 @@ class tablaPersona(models.Model):
 class tablaPelicula(models.Model):
     nombre_pelicula = models.CharField(max_length=200)
     descripcion = models.CharField(max_length=200)
+    base = models.BinaryField(blank=True)
     genero = models.CharField(max_length=200)
     persona = models.ForeignKey(tablaPersona, models.CASCADE, blank=True, null=True)
 
