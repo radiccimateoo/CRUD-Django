@@ -38,6 +38,7 @@ urlpatterns = [
 
     #EXTRAS
     path('imagenes/', imagenesView.imagenes, name='imagenes'),
+    path('conversion/', imagenesView.convertir, name='conversion'),
     path('consulta/', personaView.consulta_join, name='consulta'),
     path('leer/', personaView.leerInsert, name='leer'),
     

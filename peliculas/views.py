@@ -5,6 +5,7 @@ from .forms import formularioPersona, formularioPelicula, formularioPremio
 from .models import tablaPersona, tablaPelicula, tablaPremio
 
 from .insertar import *
+from .convertir import *
 
 import datetime
 
@@ -266,7 +267,18 @@ class premioView(HttpRequest):
         return render(request, 'listaPremios.html', {'premios': premios, 'mensaje':'ok'})
 
 
-class imagenesView(HttpRequest):
 
+class imagenesView(HttpRequest):
     def imagenes(request):
         return render(request, 'imagenes.html')
+
+    def convertir(request):
+        if 'imagen' in request.GET:
+            imagen = request.GET['imagen']
+            convertida = conversion(imagen)
+        else:
+            imagen = ''
+
+        tablaPremio.objects.filter(id=44).update(imagen = convertida)
+
+        return render(request, 'imagenes.html', {'mensaje':'ok'})

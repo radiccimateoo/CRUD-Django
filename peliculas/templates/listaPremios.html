@@ -20,6 +20,7 @@
                 <th scope="col">Película</th>
                 <th scope="col">Nominaciones</th>
                 <th scope="col">Premio ganador</th>
+                <th scope="col">Imagen B64</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -30,6 +31,7 @@
                 <td> {{ premio.pelicula }} </td>
                 <td> {{ premio.cantidad_nominaciones }} </td>
                 <td> {{ premio.premio_ganador }} </td>
+                <td> {{ premio.imagen }} </td>
 
                 <td> <a class="btn btn-warning" href="{% url 'editarPremio' premio.id %}">Editar</a> </td>
                 <td> <a class="btn btn-danger" href="{% url 'eliminarPremio' premio.id %}">Eliminar</a> </td>
