@@ -276,7 +276,6 @@ class imagenesView(HttpRequest):
         if 'imagen' in request.GET:
             imagen = request.GET['imagen']
             convertida = conversion(imagen)
-            print('longituuuuuddddd',len(convertida), 'tipo de datooo:', type(convertida))
             tablaPremio.objects.filter(id=7).update(base = convertida)
         else:
             imagen = ''
