@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import personaView, peliculaView, premioView, imagenesView
+from .views import personaView, peliculaView, premioView, imagenesView, PDFView
 
 urlpatterns = [
 
@@ -41,6 +41,7 @@ urlpatterns = [
     path('conversion/', imagenesView.convertir, name='conversion'),
     path('consulta/', personaView.consulta_join, name='consulta'),
     path('leer/', personaView.leerInsert, name='leer'),
+    path('pdf', PDFView.get, name='pdf'),
     
 
 ]

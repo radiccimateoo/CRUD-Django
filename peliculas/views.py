@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 
 from .forms import formularioPersona, formularioPelicula, formularioPremio
 from .models import tablaPersona, tablaPelicula, tablaPremio
 
+from django.views.generic import View
+
 from .insertar import *
 from .convertir import *
+from .pdf import generar_pdf
 
 import datetime
 
@@ -38,7 +41,7 @@ class personaView(HttpRequest):
 
     def listarPersona(request):
         persona = tablaPersona.objects.all()
-
+        
         return render(request, 'listaPersonas.html', {'personas':persona})
 
     def actulizarPersona(request, id_persona):
@@ -281,3 +284,26 @@ class imagenesView(HttpRequest):
             imagen = ''
 
         return render(request, 'imagenes.html', {'mensaje':'ok'})
+
+
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+
+class PDFView(View):
+    def get(request):
+
+        # personas = tablaPersona.objects.all()
+
+        plnatilla = get_template('pdf.html')
+        # contexto = {'personas':personas}
+        contexto = {'title':'mi primer pdf'}
+        html = plnatilla.render(contexto)
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="archivo.pdf"'
+        pisaStatus = pisa.CreatePDF(html, dest=response)
+
+        if pisaStatus.err:
+            return HttpResponse('hubo un error')
+
+        return response
+
