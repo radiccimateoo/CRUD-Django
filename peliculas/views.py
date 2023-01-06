@@ -1,16 +1,20 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
+from django.template.loader import get_template
+from django.contrib.staticfiles import finders
+from django.conf import settings
 
 from .forms import formularioPersona, formularioPelicula, formularioPremio
 from .models import tablaPersona, tablaPelicula, tablaPremio
 
-from django.views.generic import View
-
 from .insertar import *
 from .convertir import *
-from .pdf import generar_pdf
 
 import datetime
+import os
+
+from xhtml2pdf import pisa
+
 
 # Create your views here.
 class personaView(HttpRequest):
@@ -67,7 +71,7 @@ class personaView(HttpRequest):
         datos = tablaPersona.objects.all()
         suma = 0
         cantidad_sueldos = 0
-        persona_sueldo_bajo = '' #verificar error
+        persona_sueldo_bajo = ''
         sueldo_alto = datos[0].sueldo_mensual
         sueldo_bajo = datos[0].sueldo_mensual
 
@@ -75,6 +79,7 @@ class personaView(HttpRequest):
         for sueldo in datos:
             suma += sueldo.sueldo_mensual
             cantidad_sueldos += 1
+            
 
         sueldo_promedio = suma / cantidad_sueldos
 
@@ -286,24 +291,73 @@ class imagenesView(HttpRequest):
         return render(request, 'imagenes.html', {'mensaje':'ok'})
 
 
-from django.template.loader import get_template
-from xhtml2pdf import pisa
+def media(uri, rel):
+            """
+            Convert HTML URIs to absolute system paths so xhtml2pdf can access those
+            resources
+            """
+            result = finders.find(uri)
+            if result:
+                    if not isinstance(result, (list, tuple)):
+                            result = [result]
+                    result = list(os.path.realpath(path) for path in result)
+                    path=result[0]
+            else:
+                    sUrl = settings.STATIC_URL        # Typically /static/
+                    sRoot = settings.STATIC_ROOT      # Typically /home/userX/project_static/
+                    mUrl = settings.MEDIA_URL         # Typically /media/
+                    mRoot = settings.MEDIA_ROOT       # Typically /home/userX/project_static/media/
 
-class PDFView(View):
-    def get(request):
+                    if uri.startswith(mUrl):
+                            path = os.path.join(mRoot, uri.replace(mUrl, ""))
+                    elif uri.startswith(sUrl):
+                            path = os.path.join(sRoot, uri.replace(sUrl, ""))
+                    else:
+                            return uri
 
-        # personas = tablaPersona.objects.all()
+            # make sure that file exists
+            if not os.path.isfile(path):
+                    raise Exception(
+                            'media URI must start with %s or %s' % (sUrl, mUrl)
+                    )
+            return path
 
-        plnatilla = get_template('pdf.html')
-        # contexto = {'personas':personas}
-        contexto = {'title':'mi primer pdf'}
-        html = plnatilla.render(contexto)
+def get(request):
+
+        personas = tablaPersona.objects.all()
+
+        plantilla = get_template('pdf.html')
+
+        lista = []
+        contador_sueldos = 0
+        sumatoria_sueldos = 0
+
+        for i in personas:
+            sueldo = i.sueldo_mensual
+            contador_sueldos += 1
+            sumatoria_sueldos += sueldo 
+            lista.append(sueldo)
+        
+        mayor = max(lista)
+        menor = min(lista)
+        promedio = sumatoria_sueldos / contador_sueldos
+        diferencia = mayor - menor
+
+        contexto = {
+            'personas':personas,
+            'logo': 'img/logo.png',
+            'sueldo_promedio': round(promedio,2),
+            'sueldo_alto':mayor,
+            'sueldo_bajo':menor,
+            'diferencia':diferencia,
+        }
+
+        html = plantilla.render(contexto) 
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename="archivo.pdf"'
-        pisaStatus = pisa.CreatePDF(html, dest=response)
+        pisaStatus = pisa.CreatePDF(html, dest=response, link_callback=media)
 
         if pisaStatus.err:
             return HttpResponse('hubo un error')
 
         return response
-

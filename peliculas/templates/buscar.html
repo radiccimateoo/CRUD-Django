@@ -33,7 +33,7 @@
 
         <ul class="list-group">
             {% for persona in encontrados %}
-                <li class="list-group-item"> {{ persona.nombre }}, {{ persona.dni }} </li>
+                <li class="list-group-item"> {{ persona.nombre.capitalize }}, {{ persona.dni }} </li>
             {% endfor %}
         </ul>
 

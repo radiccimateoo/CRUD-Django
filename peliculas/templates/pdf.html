@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +7,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Archivo personas PDF</title>
 </head>
 
 <body>
-    <h1>Titulo a poner</h1>
-    <!-- <img src="" alt=""> aca va el logo de emser -->
+
+    <img src="{{ logo }}" alt="Logo de Emser" style="width: 120px; height: 50px; text-align: right;">
+
+    <h1 style="text-align: center;">Tabla de personas</h1>
 
     <table class="table">
         <thead>
@@ -27,15 +31,28 @@
             {% for persona in personas %}
             <tr>
                 <th scope="row"> {{ persona.id }} </th>
-                <td> {{ persona.nombre }} </td>
-                <td> {{ persona.apellido }} </td>
-                <td> {{ persona.dni }} </td>
-                <td> {{ persona.nacimiento }} </td>
-                <td> ${{ persona.sueldo_mensual }} </td>
+                <td style="margin-left: 30px;"> {{ persona.nombre.capitalize }} </td>
+                <td style="margin-left: 30px;"> {{ persona.apellido.capitalize }} </td>
+                <td style="margin-left: 30px;"> {{ persona.dni }} </td>
+                <td style="margin-left: 30px;"> {{ persona.nacimiento }} </td>
+                <td style="margin-left: 30px;"> ${{ persona.sueldo_mensual }} </td>
             </tr>
             {% endfor %}
         </tbody>
+        <hr>
     </table>
+    <hr>
+
+    <div>
+        <p class="mb-1"> <strong>Sueldo promedio:</strong> ${{ sueldo_promedio }} </p>
+        <p class="mb-1"> <strong>Sueldo mas alto:</strong> ${{ sueldo_alto }} </p>
+        <p class="mb-1"> <strong>Sueldo mas bajo:</strong> ${{ sueldo_bajo }} </p>
+        <p class="mb-1">
+            <strong>Diferencia entre sueldo más alto y sueldo más bajo:</strong> 
+            ${{ sueldo_alto }} - ${{ sueldo_bajo }} = ${{ diferencia }}
+        </p>
+    </div>
+
 </body>
 
 </html>
