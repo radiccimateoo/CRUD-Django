@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archivo personas PDF</title>
+
 </head>
 
 <body>
@@ -43,15 +44,18 @@
     </table>
     <hr>
 
-    <div>
-        <p class="mb-1"> <strong>Sueldo promedio:</strong> ${{ sueldo_promedio }} </p>
-        <p class="mb-1"> <strong>Sueldo mas alto:</strong> ${{ sueldo_alto }} </p>
-        <p class="mb-1"> <strong>Sueldo mas bajo:</strong> ${{ sueldo_bajo }} </p>
+    <div style="text-align: right;">
+        <p class="mb-1"> <strong> > Sueldo promedio:</strong> ${{ sueldo_promedio }} </p>
+        <p class="mb-1"> <strong> > Sueldo más alto:</strong> ${{ sueldo_alto }} </p>
+        <p class="mb-1"> <strong> > Sueldo más bajo:</strong> ${{ sueldo_bajo }} </p>
         <p class="mb-1">
-            <strong>Diferencia entre sueldo más alto y sueldo más bajo:</strong> 
+            <strong> > Diferencia entre sueldo más alto y sueldo más bajo:</strong>
             ${{ sueldo_alto }} - ${{ sueldo_bajo }} = ${{ diferencia }}
         </p>
     </div>
+    
+    <div> Página <pdf:pagenumber> </div>
+
 
 </body>
 

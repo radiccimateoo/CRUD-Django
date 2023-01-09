@@ -43,6 +43,18 @@
         </div>
     </nav>
 
+    <script>
+        window.onload = ()=> {
+            setTimeout(()=> {
+                document.getElementsByTagName('body')[0].style.backgroundColor = 'white';
+            }, 1000)
+        }
+
+        function refresh() {
+            location.reload()
+        }
+    </script>
+
     {% block content %}
 
     {% endblock %}
