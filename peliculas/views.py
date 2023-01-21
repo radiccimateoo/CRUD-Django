@@ -5,13 +5,14 @@ from django.contrib.staticfiles import finders
 from django.conf import settings
 
 from .forms import formularioPersona, formularioPelicula, formularioPremio
-from .models import tablaPersona, tablaPelicula, tablaPremio
+from .models import tablaPersona, tablaPelicula, tablaPremio, tablaImagenes
 
 from .insertar import *
 from .convertir import *
 
 import datetime
 import os
+# import base64
 
 from xhtml2pdf import pisa
 
@@ -180,6 +181,12 @@ class personaView(HttpRequest):
         
         return render(request, 'leer.html', {'archivo':archivo})
 
+    #TERMINAR Y POREGUNTAR
+    def rango_sueldo(request):
+        data = []
+        tabla = tablaPersona.objects.all()
+
+        return render(request, 'graficoSueldo.html', {'data': data})
 
 
 class peliculaView(HttpRequest):
@@ -227,7 +234,17 @@ class peliculaView(HttpRequest):
         peliculas = tablaPelicula.objects.all()
 
         return render(request, 'listaPeliculas.html', {'peliculas': peliculas, 'mensaje':'ok'})
+    
+    def grafico_genero(request):
+        generos = ['Accion','Aventura','Ciencia Ficcion','Comedia',
+                    'No Ficcion','Drama','Fantasia','Musical','Suspenso','Terror']
+        data = []
+        
+        for genero in generos:
+            tabla = tablaPelicula.objects.filter(genero = genero.lower()).count()
+            data.append(tabla)
 
+        return render(request, 'graficoGenero.html', {'data':data})
         
 class premioView(HttpRequest):
     def registrarPremio(request):
@@ -275,20 +292,36 @@ class premioView(HttpRequest):
         return render(request, 'listaPremios.html', {'premios': premios, 'mensaje':'ok'})
 
 
-
 class imagenesView(HttpRequest):
     def imagenes(request):
         return render(request, 'imagenes.html')
 
+
+class tablaImagenView(HttpRequest):
+
     def convertir(request):
+
+        tablaFotos = tablaImagenes.objects.all()
+
+        # ARREGLO PARA GUARDAR TODAS LAS IMAGENES DECODIFICADAS
+
         if 'imagen' in request.GET:
             imagen = request.GET['imagen']
             convertida = conversion(imagen)
-            tablaPremio.objects.filter(id=7).update(base = convertida)
         else:
             imagen = ''
 
-        return render(request, 'imagenes.html', {'mensaje':'ok'})
+        # GUARDANDO LAS FOTOS CONVERTIDAS EN LA TABLA
+        tabla = tablaImagenes.objects.create(base=convertida)
+
+        # DECODIFICANDO CADA UNA DE LAS FOTOS
+
+
+        # return render(request, 'fotos.html', {'decodificado':decodificadas})
+
+    def img(request):
+        tablaFotos = tablaImagenes.objects.all()
+        return render(request, 'fotos.html', {'tablaFotos':tablaFotos})
 
 
 def media(uri, rel):
@@ -321,6 +354,7 @@ def media(uri, rel):
                             'media URI must start with %s or %s' % (sUrl, mUrl)
                     )
             return path
+
 
 def get(request):
 
@@ -361,3 +395,5 @@ def get(request):
             return HttpResponse('hubo un error')
 
         return response
+
+

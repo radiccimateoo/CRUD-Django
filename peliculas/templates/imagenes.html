@@ -4,10 +4,6 @@
 
 {% block content%}
 
-{% if mensaje %}
-<div class="alert alert-success"> Foto convertida exitosamente!</div>
-{% endif %}
-
 <h1 class="text-center display-4 my-4">Galería de imágenes</h1>
 
 
@@ -52,8 +48,9 @@
     <h4 class="text-center display-4 my-4">Convertir imágen a Base64</h4>
     <form action="{% url 'conversion' %}" method="get">
         <div class="mb-3">
-            <label for="foto" class="form-label">Escriba el nombre de su foto con su respectiva extensión</label>
-            <input type="file" class="form-control" id="foto" name="imagen"> <br>
+            <label for="foto" class="form-label">Escriba el directorio donde se encuentra su foto</label>
+            <input type="text" class="form-control" id="foto" name="imagen"
+            placeholder="ej: c:/Users/Desktop/imagenes/imagen.jpg"> <br>
             <button type="submit" class="btn btn-success">Convertir</button>
         </div>
     </form>

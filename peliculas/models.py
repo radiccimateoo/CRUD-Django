@@ -15,7 +15,6 @@ class tablaPersona(models.Model):
 class tablaPelicula(models.Model):
     nombre_pelicula = models.CharField(max_length=200)
     descripcion = models.CharField(max_length=200)
-    base = models.BinaryField(blank=True)
     genero = models.CharField(max_length=200)
     persona = models.ForeignKey(tablaPersona, models.CASCADE, blank=True, null=True)
 
@@ -25,8 +24,13 @@ class tablaPelicula(models.Model):
 class tablaPremio(models.Model):
     premio_ganador = models.CharField(max_length=200)
     cantidad_nominaciones = models.IntegerField()
-    base = models.CharField(blank=True, null=True, max_length=20000000)
     pelicula = models.ForeignKey(tablaPelicula, models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return "{}".format(self.premio_ganador)
+
+class tablaImagenes(models.Model):
+    base = models.CharField(blank=True, null=True, max_length=20000000)
+
+    def __str__(self):
+        return "{}".format(self.base)

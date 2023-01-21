@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import personaView, peliculaView, premioView, imagenesView, get
+from .views import personaView, peliculaView, premioView, imagenesView, get, tablaImagenView
 
 urlpatterns = [
 
@@ -14,7 +14,8 @@ urlpatterns = [
     path('anual/<int:sueldo>', personaView.sueldo_anual, name='anual'),
     path('buscar/', personaView.filtrar, name='buscar'),
     path('edadActual/<int:anio_nacimiento>', personaView.edadActual, name='edadActual'),
-    path('actualizarSueldo/<persona>/<int:sueldo>/<int:porcentaje>', personaView.actualizarSueldo, name='actualizarSueldo'),
+    path('actualizarSueldo/<persona>/<int:sueldo>/<int:prcentaje>', personaView.actualizarSueldo, name='actualizarSueldo'),
+    path('rango/', personaView.rango_sueldo, name='rango'),
 
 
 
@@ -25,6 +26,7 @@ urlpatterns = [
     path('editarPelicula/<int:id_pelicula>', peliculaView.editarPelicula, name='editarPelicula'),
     path('actualizarPelicula/<int:id_pelicula>', peliculaView.actulizarPelicula, name='actualizarPelicula'),
     path('eliminarPelicula/<int:id_pelicula>', peliculaView.eliminarPelicula, name='eliminarPelicula'),
+    path('graficoGenero/', peliculaView.grafico_genero, name='graficoGenero'),
 
 
     # PREMIOS
@@ -36,12 +38,16 @@ urlpatterns = [
     path('eliminarPremio/<int:id_premio>', premioView.eliminarPremio, name='eliminarPremio'),
 
 
+    # FOTOS
+    path('fotos/', tablaImagenView.img, name='fotos'),
+    path('conversion/', tablaImagenView.convertir, name='conversion'),
+
     #EXTRAS
     path('imagenes/', imagenesView.imagenes, name='imagenes'),
-    path('conversion/', imagenesView.convertir, name='conversion'),
     path('consulta/', personaView.consulta_join, name='consulta'),
     path('leer/', personaView.leerInsert, name='leer'),
     path('pdf/', get, name='pdf'),
+    # path('pdf/', get, name='pdf'),
     
 
 ]

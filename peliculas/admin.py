@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import tablaPersona, tablaPelicula, tablaPremio
+from .models import tablaPersona, tablaPelicula, tablaPremio, tablaImagenes
 
 # Register your models here.
 class Persona(admin.ModelAdmin):
@@ -15,3 +15,4 @@ class Premio(admin.ModelAdmin):
 admin.site.register(tablaPersona, Persona)
 admin.site.register(tablaPelicula, Pelicula)
 admin.site.register(tablaPremio, Premio)
+admin.site.register(tablaImagenes)

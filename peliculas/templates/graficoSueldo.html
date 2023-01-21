@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div id="container"></div>
+    <a href="{% url 'listaPersonas' %}" class="btn btn-primary">Volver</a>
+</div>
+
+<script>
+
+    datos = {{ data | safe}}
+
+    Highcharts.setOptions({
+        colors: ['#C0C0C0', '#0C090A']
+    });
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column',
+            zoomType: 'y'
+        },
+        title: {
+            text: 'Rango de Sueldos de las personas'
+        },
+        xAxis: {
+            title: {
+                text: null
+            },
+            accessibility: {
+                description: 'Countries'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Rango'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        plotOptions: {
+            column: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        tooltip: {
+            stickOnContact: true,
+            backgroundColor: 'rgba(255, 255, 255, 0.93)'
+        },
+        legend: {
+            enabled: true
+        },
+        series: [
+            {
+                name: 'Sueldo $',
+                data: datos,
+                borderColor: '#949494'
+            },
+        ]
+    });
+</script>
+{% endblock %}

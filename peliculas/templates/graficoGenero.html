@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div id="container"></div>
+    <a href="{% url 'listaPeliculas' %}" class="btn btn-primary">Volver</a>
+</div>
+
+
+<script>
+    datos = {{ data | safe }}
+    
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column',
+            zoomType: 'y'
+        },
+        title: {
+            text: 'Películas según genero'
+        },
+        xAxis: {
+            categories: [
+                'Acción',
+                'Aventuras',
+                'Ciencia Ficción',
+                'Comedia',
+                'No- Ficción',
+                'Drama',
+                'Fantasía',
+                'Musical',
+                'Suspenso',
+                'Terror'
+            ],
+            title: {
+                text: null
+            },
+            accessibility: {
+                description: 'Géneros'
+            }
+        },
+        yAxis: {
+            min: 0,
+            tickInterval: 2,
+            title: {
+                text: 'Escala'
+            },
+            labels: {
+                overflow: 'justify',
+                format: '{value}'
+            }
+        },
+        plotOptions: {
+            column: {
+                dataLabels: {
+                    enabled: true,
+                }
+            }
+        },
+        tooltip: {
+            valueSuffix: ' película/s ',
+            stickOnContact: true,
+            backgroundColor: 'rgba(255, 255, 255, 0.93)'
+        },
+        legend: {
+            enabled: false
+        },
+        series: [
+            {
+                name: 'Cantidad de películas',
+                colorByPoint: true,
+                data: datos,
+                borderColor: '#5997DE'
+            }
+        ]
+    });
+</script>
+{% endblock %}

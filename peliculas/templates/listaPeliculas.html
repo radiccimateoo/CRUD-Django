@@ -28,9 +28,9 @@
             {% for pelicula in peliculas %}
             <tr>
                 <th scope="row"> {{ pelicula.id }} </th>
-                <td> {{ pelicula.nombre_pelicula }} </td>
-                <td> {{ pelicula.descripcion }} </td>
-                <td> {{ pelicula.genero }} </td>
+                <td> {{ pelicula.nombre_pelicula.capitalize }} </td>
+                <td> {{ pelicula.descripcion.capitalize }} </td>
+                <td> {{ pelicula.genero.capitalize }} </td>
                 <td> {{ pelicula.persona }} </td>
 
                 <td> <a class="btn btn-warning" href="{% url 'editarPelicula' pelicula.id %}">Editar</a> </td>
@@ -42,6 +42,7 @@
 
     <a class="btn btn-success" href="{% url 'registrarPelicula' %}">Nueva Pelicula</a>
     <button class="btn btn-warning" onclick="refresh();"> Refrescar Tabla </button>
+    <a href="{% url 'graficoGenero' %}" class="btn btn-info">Ver estadísticas de género</a>
 </div>
 
 {% endblock %}

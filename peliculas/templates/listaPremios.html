@@ -29,7 +29,7 @@
                 <th scope="row"> {{ premio.id }} </th>
                 <td> {{ premio.pelicula }} </td>
                 <td> {{ premio.cantidad_nominaciones }} </td>
-                <td> {{ premio.premio_ganador }} </td>
+                <td> {{ premio.premio_ganador.capitalize }} </td>
 
                 <td> <a class="btn btn-warning" href="{% url 'editarPremio' premio.id %}">Editar</a> </td>
                 <td> <a class="btn btn-danger" href="{% url 'eliminarPremio' premio.id %}">Eliminar</a> </td>
