@@ -1,5 +1,5 @@
 from django import forms
-from .models import tablaPersona, tablaPelicula, tablaPremio
+from .models import tablaPersona, tablaPelicula, tablaPremio, tablaCines
 
 class formularioPersona(forms.ModelForm):
     class Meta:
@@ -17,4 +17,9 @@ class formularioPelicula(forms.ModelForm):
 class formularioPremio(forms.ModelForm):
     class Meta:
         model = tablaPremio
+        fields = '__all__'
+
+class formularioCine(forms.ModelForm):
+    class Meta:
+        model = tablaCines
         fields = '__all__'

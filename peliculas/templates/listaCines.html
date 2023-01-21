@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<br>
+<h1 class="text-center display-4 my-4">Lista Cines</h1>
+<br>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">GPS</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Web</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cine in cines %}
+            <tr>
+                <th scope="row"> {{ cine.id }} </th>
+                <td> {{ cine.nombre.capitalize }} </td>
+                <td> {{ cine.direccion.capitalize }} </td>
+                <td> {{ cine.posicion_gps }} </td>
+                <td> {{ cine.telefono }} </td>
+                <td> {{ cine.web }} </td>
+
+                <td> <a class="btn btn-warning" href="{% url 'editarCine' cine.id%}">Editar</a> </td>
+                <td> <a class="btn btn-danger" href="{% url 'eliminarCine' cine.id %}">Eliminar</a> </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{% url 'registrarCine' %}">Nuevo Cine</a>
+    <button class="btn btn-warning" onclick="refresh();"> Refrescar Tabla </button>
+    <a href="{% url 'mapa' %}" class="btn btn-info">Ver mapa</a>
+    
+
+</div>
+<br>
+{% endblock %}

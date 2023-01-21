@@ -4,8 +4,8 @@ from django.template.loader import get_template
 from django.contrib.staticfiles import finders
 from django.conf import settings
 
-from .forms import formularioPersona, formularioPelicula, formularioPremio
-from .models import tablaPersona, tablaPelicula, tablaPremio, tablaImagenes
+from .forms import formularioPersona, formularioPelicula, formularioPremio, formularioCine
+from .models import tablaPersona, tablaPelicula, tablaPremio, tablaImagenes, tablaCines
 
 from .insertar import *
 from .convertir import *
@@ -167,7 +167,7 @@ class personaView(HttpRequest):
         peliculas = tablaPelicula.objects.select_related('persona').all()
 
         for premio in premios:
-            p = premio.premio_ganador, premio.pelicula.nombre_pelicula
+            p = premio.cantidad_nominaciones, premio.pelicula.nombre_pelicula
             pre.append(p)
 
         for pelicula in peliculas:
@@ -291,6 +291,20 @@ class premioView(HttpRequest):
 
         return render(request, 'listaPremios.html', {'premios': premios, 'mensaje':'ok'})
 
+    
+    def grafico_premio(request):
+        conjunto_datos = []
+        tabla = tablaPremio.objects.filter(cantidad_nominaciones__gte = 0)
+
+        for i in tabla:
+            datos = {
+                'name': i.pelicula.nombre_pelicula, 
+                'y': round(i.cantidad_nominaciones * 100 // 30, 2)
+            }
+            conjunto_datos.append(datos)
+
+        return render(request, 'graficoPremio.html', {'data':conjunto_datos})
+
 
 class imagenesView(HttpRequest):
     def imagenes(request):
@@ -397,3 +411,50 @@ def get(request):
         return response
 
 
+class CineView(HttpRequest):
+    def registrarCine(request):
+        cine = formularioCine()
+        
+        return render(request, 'registrarCine.html', {'formCine': cine})
+
+    def procesarCine(request):
+        cine = formularioCine(request.POST)
+        
+        if cine.is_valid():
+            cine.save()
+            insertar(cine.save())
+            cine = formularioCine()
+        
+        return render(request, 'registrarCine.html', {'formCine':cine, 'mensaje':'ok'})
+
+    def editarCine(request, id_cine):
+        cine = tablaCines.objects.filter(id= id_cine).first()
+        formcine = formularioCine(instance= cine)
+        
+        return render(request, 'editarCine.html', {'formCine':formcine, 'cine':cine})
+
+    def listarCine(request):
+        cine = tablaCines.objects.all()
+
+        return render(request, 'listaCines.html', {'cines':cine})
+
+    def actulizarCine(request, id_cine):
+        cine =tablaCines.objects.get(pk=id_cine)
+        formcine = formularioCine(request.POST, instance= cine)
+        
+        if formcine.is_valid():
+            formcine.save()
+        
+        cines = tablaCines.objects.all()
+
+        return render(request, 'listaCines.html', {'cines': cines})
+
+    def eliminarCine(request, id_cine):
+        cine = tablaCines.objects.get(pk=id_cine)
+        cine.delete()
+        cines = tablaCines.objects.all()
+
+        return render(request, 'listaCines.html', {'cines': cines, 'mensaje':'ok'})
+    
+    def mapa(request):
+        return render(request, 'mapa.html')

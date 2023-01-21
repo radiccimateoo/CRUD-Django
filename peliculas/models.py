@@ -22,7 +22,6 @@ class tablaPelicula(models.Model):
         return "{}".format(self.nombre_pelicula)
 
 class tablaPremio(models.Model):
-    premio_ganador = models.CharField(max_length=200)
     cantidad_nominaciones = models.IntegerField()
     pelicula = models.ForeignKey(tablaPelicula, models.CASCADE, blank=True, null=True)
 
@@ -34,3 +33,10 @@ class tablaImagenes(models.Model):
 
     def __str__(self):
         return "{}".format(self.base)
+
+class tablaCines(models.Model):
+    nombre = models.CharField(max_length=400)
+    direccion = models.CharField(max_length=400)
+    posicion_gps = models.CharField(max_length=400)
+    telefono = models.PositiveIntegerField()
+    web = models.CharField(max_length=400)

@@ -8,3 +8,11 @@
 ['21/1/2023--1:17:49']	Emoji
 ['21/1/2023--1:19:34']	Shrek
 ['21/1/2023--1:24:11']	Jumanji
+['21/1/2023--15:23:46']	David de Donatello
+['21/1/2023--16:21:19']	tablaCines object (1)
+['21/1/2023--16:26:12']	tablaCines object (2)
+['21/1/2023--16:27:32']	tablaCines object (3)
+['21/1/2023--16:29:57']	tablaCines object (4)
+['21/1/2023--16:33:7']	tablaCines object (5)
+['21/1/2023--16:35:25']	tablaCines object (6)
+['21/1/2023--16:37:33']	tablaCines object (7)

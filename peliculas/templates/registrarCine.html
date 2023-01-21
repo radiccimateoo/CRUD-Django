@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if form.errors %}
+<div class="alert alert-warning">Error al registrar Cine</div>
+{% endif %}
+
+<br>
+<h1 class="text-center display-4 my-4">Registro de cine</h1>
+
+<br>
+{% if mensaje %}
+<div class="alert alert-success"> Cine registrada exitosamente! </div>
+{% endif %}
+<br>
+
+<div class="container">
+    <form action="{% url 'guardarCine' %}" method="POST">
+        {% csrf_token %}
+
+        {{ formCine | crispy }}
+
+        <button type="submit" class="btn btn-success">Registrar</button>
+        <a class="btn btn-primary" href="{% url 'listaCines' %}">Volver</a>
+
+    </form>
+</div>
+
+{% endblock %}

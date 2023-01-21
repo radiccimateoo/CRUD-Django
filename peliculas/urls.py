@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import personaView, peliculaView, premioView, imagenesView, get, tablaImagenView
+from .views import personaView, peliculaView, premioView, imagenesView, get, tablaImagenView, CineView
 
 urlpatterns = [
 
@@ -36,6 +36,17 @@ urlpatterns = [
     path('editarPremio/<int:id_premio>', premioView.editarPremio, name='editarPremio'),
     path('actualizarPremio/<int:id_premio>', premioView.actulizarPremio, name='actualizarPremio'),
     path('eliminarPremio/<int:id_premio>', premioView.eliminarPremio, name='eliminarPremio'),
+    path('graficoPremio/', premioView.grafico_premio, name='victoria'),
+
+
+    # CINES
+    path('registrarCine/', CineView.registrarCine, name='registrarCine'),
+    path('guardarCine/', CineView.procesarCine, name='guardarCine'),
+    path('listaCines/', CineView.listarCine, name='listaCines'),
+    path('editarCine/<int:id_cine>', CineView.editarCine, name='editarCine'),
+    path('actualizarCine/<int:id_cine>', CineView.actulizarCine, name='actualizarCine'),
+    path('eliminarCine/<int:id_cine>', CineView.eliminarCine, name='eliminarCine'),
+    path('mapa/', CineView.mapa, name='mapa'),
 
 
     # FOTOS
@@ -47,7 +58,4 @@ urlpatterns = [
     path('consulta/', personaView.consulta_join, name='consulta'),
     path('leer/', personaView.leerInsert, name='leer'),
     path('pdf/', get, name='pdf'),
-    # path('pdf/', get, name='pdf'),
-    
-
 ]

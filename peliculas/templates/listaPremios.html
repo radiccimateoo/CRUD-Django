@@ -4,11 +4,11 @@
 {% block content %}
 
 <br>
-<h1 class="text-center display-4 my-4">Lista Premios</h1>
+<h1 class="text-center display-4 my-4">Lista de candidatos a ganar</h1>
 <br>
 
 {% if mensaje %}
-<div class="alert alert-success"> Premio borrado exitosamente! </div>
+<div class="alert alert-success"> Candidato borrado exitosamente! </div>
 {% endif %}
 <br>
 
@@ -19,7 +19,6 @@
                 <th scope="col">ID</th>
                 <th scope="col">Película</th>
                 <th scope="col">Nominaciones</th>
-                <th scope="col">Premio ganador</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -29,7 +28,6 @@
                 <th scope="row"> {{ premio.id }} </th>
                 <td> {{ premio.pelicula }} </td>
                 <td> {{ premio.cantidad_nominaciones }} </td>
-                <td> {{ premio.premio_ganador.capitalize }} </td>
 
                 <td> <a class="btn btn-warning" href="{% url 'editarPremio' premio.id %}">Editar</a> </td>
                 <td> <a class="btn btn-danger" href="{% url 'eliminarPremio' premio.id %}">Eliminar</a> </td>
@@ -38,8 +36,9 @@
         </tbody>
     </table>
 
-    <a class="btn btn-success" href="{% url 'registrarPremio' %}">Nuevo Premio</a>
+    <a class="btn btn-success" href="{% url 'registrarPremio' %}">Nuevo candidato</a>
     <button class="btn btn-warning" onclick="refresh();"> Refrescar Tabla </button>
+    <a href="{% url 'victoria' %}" class="btn btn-info">Ver gráfico de probabilidad de victoria</a>
 </div>
 
 {% endblock %}
