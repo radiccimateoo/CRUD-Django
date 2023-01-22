@@ -37,6 +37,7 @@ class tablaImagenes(models.Model):
 class tablaCines(models.Model):
     nombre = models.CharField(max_length=400)
     direccion = models.CharField(max_length=400)
-    posicion_gps = models.CharField(max_length=400)
+    latitud = models.CharField(max_length=400, null=False, blank=False, default='122')
+    longitud = models.CharField(max_length=400, null=False, blank=False, default='122')
     telefono = models.PositiveIntegerField()
     web = models.CharField(max_length=400)

@@ -14,7 +14,8 @@
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Dirección</th>
-                <th scope="col">GPS</th>
+                <th scope="col">GPS (latitud)</th>
+                <th scope="col">GPS (longitud)</th>
                 <th scope="col">Teléfono</th>
                 <th scope="col">Web</th>
                 <th scope="col">Editar</th>
@@ -27,7 +28,8 @@
                 <th scope="row"> {{ cine.id }} </th>
                 <td> {{ cine.nombre.capitalize }} </td>
                 <td> {{ cine.direccion.capitalize }} </td>
-                <td> {{ cine.posicion_gps }} </td>
+                <td> {{ cine.latitud }} </td>
+                <td> {{ cine.longitud }} </td>
                 <td> {{ cine.telefono }} </td>
                 <td> {{ cine.web }} </td>
 
@@ -40,7 +42,7 @@
 
     <a class="btn btn-success" href="{% url 'registrarCine' %}">Nuevo Cine</a>
     <button class="btn btn-warning" onclick="refresh();"> Refrescar Tabla </button>
-    <a href="{% url 'mapa' %}" class="btn btn-info">Ver mapa</a>
+    <a href="{% url 'mapa' %}" class="btn btn-info" id="mapa">Ver mapa</a>
     
 
 </div>

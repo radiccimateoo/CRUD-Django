@@ -457,4 +457,10 @@ class CineView(HttpRequest):
         return render(request, 'listaCines.html', {'cines': cines, 'mensaje':'ok'})
     
     def mapa(request):
-        return render(request, 'mapa.html')
+        cines = tablaCines.objects.all()
+        data = []
+        for cine in cines:
+            data.append(float(cine.latitud))
+            data.append(float(cine.longitud))
+
+        return render(request, 'mapa.html', {'data':data})

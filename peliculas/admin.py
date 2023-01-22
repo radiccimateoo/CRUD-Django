@@ -12,7 +12,7 @@ class Premio(admin.ModelAdmin):
     list_filter = ('cantidad_nominaciones', 'pelicula')
 
 class Cine(admin.ModelAdmin):
-    list_filter = ('nombre','direccion', 'posicion_gps', 'telefono', 'web')
+    list_filter = ('nombre','direccion', 'latitud', 'longitud', 'telefono', 'web')
 
 
 admin.site.register(tablaPersona, Persona)

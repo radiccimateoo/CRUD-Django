@@ -13,23 +13,24 @@
 <div class="container">
     <br>
     <h1 class="text-center display-4 my-4">Explora los cines!</h1>
+
     <div id="map" style="height: 400px; width: 800px; margin: 10px auto;"></div>
 </div>
 
 
 <script>
     const map = L.map('map').setView([-31.420033987817458, -64.18878104350644], 13);
+    const ubicaciones = {{ data | safe }}
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    const marker1 = L.marker([-31.420033987817458, -64.18878104350644]).addTo(map);
-    const marker2 = L.marker([-31.412945955985695, -64.20453809505753]).addTo(map);
-    const marker3 = L.marker([-31.416080531885257, -64.18828060800317]).addTo(map);
-
-
+    for (let i = 0; i < ubicaciones.length; i++) {
+        const marker = L.marker([ubicaciones[i], ubicaciones[i+1]]).addTo(map);
+        i++
+    }
 
 </script>
 
