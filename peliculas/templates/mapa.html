@@ -27,6 +27,7 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
+
     for (let i = 0; i < ubicaciones.length; i++) {
         const marker = L.marker([ubicaciones[i], ubicaciones[i+1]]).addTo(map);
         i++

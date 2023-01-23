@@ -29,7 +29,7 @@ class tablaPremio(models.Model):
         return "{}".format(self.premio_ganador)
 
 class tablaImagenes(models.Model):
-    base = models.CharField(blank=True, null=True, max_length=20000000)
+    base = models.BinaryField()
 
     def __str__(self):
         return "{}".format(self.base)

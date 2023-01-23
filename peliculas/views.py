@@ -12,7 +12,7 @@ from .convertir import *
 
 import datetime
 import os
-# import base64
+import base64
 
 from xhtml2pdf import pisa
 
@@ -186,6 +186,9 @@ class personaView(HttpRequest):
         data = []
         tabla = tablaPersona.objects.all()
 
+        for sueldo in tabla:
+            data.append(sueldo.sueldo_mensual)
+
         return render(request, 'graficoSueldo.html', {'data': data})
 
 
@@ -317,21 +320,25 @@ class tablaImagenView(HttpRequest):
 
         tablaFotos = tablaImagenes.objects.all()
 
-        # ARREGLO PARA GUARDAR TODAS LAS IMAGENES DECODIFICADAS
-
         if 'imagen' in request.GET:
             imagen = request.GET['imagen']
             convertida = conversion(imagen)
         else:
             imagen = ''
 
-        # GUARDANDO LAS FOTOS CONVERTIDAS EN LA TABLA
         tabla = tablaImagenes.objects.create(base=convertida)
+        return render(request, 'fotos.html', {'tabla':tablaFotos})
+    
+    def decodificar(request):
+        
+        tablaFotos = tablaImagenes.objects.all()
+        decodificadas = []
 
-        # DECODIFICANDO CADA UNA DE LAS FOTOS
+        for foto in tablaFotos:
+            decodificada = foto.base.decode('utf-8')
+            decodificadas.append(decodificada)
 
-
-        # return render(request, 'fotos.html', {'decodificado':decodificadas})
+        return render(request, 'carrusel.html', {'decodificadas':decodificadas})
 
     def img(request):
         tablaFotos = tablaImagenes.objects.all()

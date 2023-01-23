@@ -52,6 +52,8 @@ urlpatterns = [
     # FOTOS
     path('fotos/', tablaImagenView.img, name='fotos'),
     path('conversion/', tablaImagenView.convertir, name='conversion'),
+    path('carrusel/', tablaImagenView.decodificar, name='carrusel'),
+    
 
     #EXTRAS
     path('imagenes/', imagenesView.imagenes, name='imagenes'),
