@@ -16,7 +16,7 @@
 <script>
 
     cant = {{ cantidad | safe }}
-    sueldos = {{ sueldos | safe }}
+    rang = {{ rangos | safe }}
 
     Highcharts.chart('container', {
         chart: {
@@ -27,7 +27,7 @@
             text: 'Rango de sueldos de tabla personas'
         },
         xAxis: {
-            categories: cant,
+            categories: rang,
             title: {
                 text: null
             },
@@ -39,7 +39,7 @@
             min: 0,
             tickInterval: 2,
             title: {
-                text: 'Rango de sueldos'
+                text: 'Cantidad de personas'
             },
             labels: {
                 overflow: 'justify',
@@ -50,7 +50,6 @@
             column: {
                 dataLabels: {
                     enabled: true,
-                    format: '{y}US$'
                 }
             }
         },
@@ -63,7 +62,7 @@
         },
         series: [
             {
-                data: sueldos,
+                data: cant,
                 borderColor: '#5997DE'
             }
         ]

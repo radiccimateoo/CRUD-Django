@@ -12,7 +12,6 @@ from .convertir import *
 
 import datetime
 import os
-import base64
 
 from xhtml2pdf import pisa
 
@@ -182,13 +181,20 @@ class personaView(HttpRequest):
         return render(request, 'leer.html', {'archivo':archivo})
 
     def rango_sueldo(request):
-        rangos = []
-        sueldos = []
+        # c representa cantidad de personas y r representa los rangos
 
-        tabla = tablaPersona.objects.all()
+        cantidad = []
+        rangos = []
+
+        r1, r2, r3 = '0, 1000','1001, 2000', '2001, 3000'
+        r4, r5, r6 = '3001, 4000', '4001, 5000', '5001, 6000'
+        r7, r8, r9 = '6001, 7000', '7001, 8000', '8001, 9000'
+
+        rangos.append(r1), rangos.append(r2), rangos.append(r3), rangos.append(r4), 
+        rangos.append(r5), rangos.append(r6), rangos.append(r7), rangos.append(r8), rangos.append(r9)
 
         rango_uno = tablaPersona.objects.filter(sueldo_mensual__lte= 1000).count()
-        rango_dos = tablaPersona.objects.filter(sueldo_mensual__gte=1000 ,sueldo_mensual__lte= 2000).count()
+        rango_dos = tablaPersona.objects.filter(sueldo_mensual__gte=1001 ,sueldo_mensual__lte= 2000).count()
         rango_tres = tablaPersona.objects.filter(sueldo_mensual__gte=2001 ,sueldo_mensual__lte= 3000).count()
         rango_cuatro = tablaPersona.objects.filter(sueldo_mensual__gte=3001 ,sueldo_mensual__lte= 4000).count()
         rango_cinco = tablaPersona.objects.filter(sueldo_mensual__gte=4001 ,sueldo_mensual__lte= 5000).count()
@@ -197,14 +203,11 @@ class personaView(HttpRequest):
         rango_ocho = tablaPersona.objects.filter(sueldo_mensual__gte=7001 ,sueldo_mensual__lte= 8000).count()
         rango_nueve = tablaPersona.objects.filter(sueldo_mensual__gte=8001 ,sueldo_mensual__lte= 9000).count()
 
-        rangos.append(rango_uno), rangos.append(rango_dos), rangos.append(rango_tres), rangos.append(rango_cuatro),
-        rangos.append(rango_cinco), rangos.append(rango_seis), rangos.append(rango_siete), rangos.append(rango_ocho),
-        rangos.append(rango_ocho),rangos.append(rango_nueve)
+        cantidad.append(rango_uno), cantidad.append(rango_dos), cantidad.append(rango_tres), 
+        cantidad.append(rango_cuatro), cantidad.append(rango_cinco), cantidad.append(rango_seis), 
+        cantidad.append(rango_siete), cantidad.append(rango_ocho), cantidad.append(rango_nueve)
 
-        for i in tabla:
-            sueldos.append(i.sueldo_mensual)
-
-        return render(request, 'graficoSueldo.html', {'cantidad': rangos, 'sueldos':sueldos})
+        return render(request, 'graficoSueldo.html', {'cantidad': cantidad, 'rangos': rangos})
 
 
 class peliculaView(HttpRequest):
