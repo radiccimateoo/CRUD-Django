@@ -16,3 +16,40 @@
 ['21/1/2023--16:33:7']	tablaCines object (5)
 ['21/1/2023--16:35:25']	tablaCines object (6)
 ['21/1/2023--16:37:33']	tablaCines object (7)
+['24/1/2023--0:56:4']	Alan
+['24/1/2023--0:56:41']	Martina
+['24/1/2023--0:57:15']	Amadeo
+['24/1/2023--0:57:50']	Oscar
+['24/1/2023--0:58:36']	Andrea
+['24/1/2023--0:59:45']	Edgar
+['24/1/2023--1:0:41']	Ariel
+['24/1/2023--1:2:36']	Gato con botas
+['24/1/2023--1:4:5']	Avatar 2
+['24/1/2023--1:4:59']	Megan
+['24/1/2023--1:6:43']	Ponyo y el secreto de la sirenita
+['24/1/2023--1:7:57']	babylon
+['24/1/2023--1:8:35']	La luz del diablo
+['24/1/2023--1:9:34']	Agente Fortune: el gran engaño
+['24/1/2023--1:10:19']	Un Mundo Extraño
+['24/1/2023--1:11:55']	tren bala
+['24/1/2023--1:13:32']	mision imposible
+['24/1/2023--1:14:49']	Black widow
+['24/1/2023--1:16:37']	Zathura - Una aventura espacial
+['24/1/2023--1:17:10']	E.T., el extraterrestre
+['24/1/2023--1:19:3']	Hermanos
+['24/1/2023--1:27:14']	Un Mundo Extraño
+['24/1/2023--1:27:24']	Agente Fortune: el gran engaño
+['24/1/2023--1:27:32']	La luz del diablo
+['24/1/2023--1:27:40']	babylon
+['24/1/2023--1:27:47']	Ponyo y el secreto de la sirenita
+['24/1/2023--1:27:54']	Ponyo y el secreto de la sirenita
+['24/1/2023--1:27:59']	Megan
+['24/1/2023--1:28:9']	Avatar 2
+['24/1/2023--1:28:16']	Gato con botas
+['24/1/2023--1:30:5']	La luz del diablo
+['24/1/2023--1:43:0']	tablaCines object (8)
+['24/1/2023--1:44:21']	tablaCines object (9)
+['24/1/2023--1:49:4']	tablaCines object (10)
+['24/1/2023--1:50:21']	tablaCines object (11)
+['24/1/2023--1:53:19']	tablaCines object (12)
+['24/1/2023--2:31:47']	Agustin

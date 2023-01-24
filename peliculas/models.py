@@ -26,7 +26,7 @@ class tablaPremio(models.Model):
     pelicula = models.ForeignKey(tablaPelicula, models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return "{}".format(self.premio_ganador)
+        return "{}".format(self.pelicula)
 
 class tablaImagenes(models.Model):
     base = models.BinaryField()

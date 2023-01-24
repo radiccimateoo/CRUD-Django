@@ -15,11 +15,13 @@
     <h1 class="text-center display-4 my-4">Explora los cines!</h1>
 
     <div id="map" style="height: 400px; width: 800px; margin: 10px auto;"></div>
+
+    <a href="{% url 'listaCines' %}" class="btn btn-primary">Volver a la tabla</a>
 </div>
 
 
 <script>
-    const map = L.map('map').setView([-31.420033987817458, -64.18878104350644], 13);
+    const map = L.map('map').setView([-31.420033987817458, -64.18878104350644], 8);
     const ubicaciones = {{ data | safe }}
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

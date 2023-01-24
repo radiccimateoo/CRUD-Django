@@ -15,20 +15,19 @@
 
 <script>
 
-    datos = {{ data | safe}}
+    cant = {{ cantidad | safe }}
+    sueldos = {{ sueldos | safe }}
 
-    Highcharts.setOptions({
-        colors: ['#C0C0C0', '#0C090A']
-    });
     Highcharts.chart('container', {
         chart: {
             type: 'column',
             zoomType: 'y'
         },
         title: {
-            text: 'Rango de Sueldos de las personas'
+            text: 'Rango de sueldos de tabla personas'
         },
         xAxis: {
+            categories: cant,
             title: {
                 text: null
             },
@@ -37,17 +36,21 @@
             }
         },
         yAxis: {
+            min: 0,
+            tickInterval: 2,
             title: {
-                text: 'Rango'
+                text: 'Rango de sueldos'
             },
             labels: {
-                overflow: 'justify'
+                overflow: 'justify',
+                format: '{value}'
             }
         },
         plotOptions: {
             column: {
                 dataLabels: {
-                    enabled: true
+                    enabled: true,
+                    format: '{y}US$'
                 }
             }
         },
@@ -56,14 +59,13 @@
             backgroundColor: 'rgba(255, 255, 255, 0.93)'
         },
         legend: {
-            enabled: true
+            enabled: false
         },
         series: [
             {
-                name: 'Cantidad de personas: ',
-                data: datos,
-                borderColor: '#949494'
-            },
+                data: sueldos,
+                borderColor: '#5997DE'
+            }
         ]
     });
 </script>

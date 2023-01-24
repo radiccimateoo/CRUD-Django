@@ -181,15 +181,30 @@ class personaView(HttpRequest):
         
         return render(request, 'leer.html', {'archivo':archivo})
 
-    #TERMINAR Y POREGUNTAR
     def rango_sueldo(request):
-        data = []
+        rangos = []
+        sueldos = []
+
         tabla = tablaPersona.objects.all()
 
-        for sueldo in tabla:
-            data.append(sueldo.sueldo_mensual)
+        rango_uno = tablaPersona.objects.filter(sueldo_mensual__lte= 1000).count()
+        rango_dos = tablaPersona.objects.filter(sueldo_mensual__gte=1000 ,sueldo_mensual__lte= 2000).count()
+        rango_tres = tablaPersona.objects.filter(sueldo_mensual__gte=2001 ,sueldo_mensual__lte= 3000).count()
+        rango_cuatro = tablaPersona.objects.filter(sueldo_mensual__gte=3001 ,sueldo_mensual__lte= 4000).count()
+        rango_cinco = tablaPersona.objects.filter(sueldo_mensual__gte=4001 ,sueldo_mensual__lte= 5000).count()
+        rango_seis = tablaPersona.objects.filter(sueldo_mensual__gte=5001 ,sueldo_mensual__lte= 6000).count()
+        rango_siete = tablaPersona.objects.filter(sueldo_mensual__gte=6001 ,sueldo_mensual__lte= 7000).count()
+        rango_ocho = tablaPersona.objects.filter(sueldo_mensual__gte=7001 ,sueldo_mensual__lte= 8000).count()
+        rango_nueve = tablaPersona.objects.filter(sueldo_mensual__gte=8001 ,sueldo_mensual__lte= 9000).count()
 
-        return render(request, 'graficoSueldo.html', {'data': data})
+        rangos.append(rango_uno), rangos.append(rango_dos), rangos.append(rango_tres), rangos.append(rango_cuatro),
+        rangos.append(rango_cinco), rangos.append(rango_seis), rangos.append(rango_siete), rangos.append(rango_ocho),
+        rangos.append(rango_ocho),rangos.append(rango_nueve)
+
+        for i in tabla:
+            sueldos.append(i.sueldo_mensual)
+
+        return render(request, 'graficoSueldo.html', {'cantidad': rangos, 'sueldos':sueldos})
 
 
 class peliculaView(HttpRequest):
@@ -297,7 +312,7 @@ class premioView(HttpRequest):
     
     def grafico_premio(request):
         conjunto_datos = []
-        tabla = tablaPremio.objects.filter(cantidad_nominaciones__gte = 0)
+        tabla = tablaPremio.objects.filter(cantidad_nominaciones__gte = 1)
 
         for i in tabla:
             datos = {
@@ -327,7 +342,7 @@ class tablaImagenView(HttpRequest):
             imagen = ''
 
         tabla = tablaImagenes.objects.create(base=convertida)
-        return render(request, 'fotos.html', {'tabla':tablaFotos})
+        return render(request, 'imagenes.html')
     
     def decodificar(request):
         
@@ -337,8 +352,11 @@ class tablaImagenView(HttpRequest):
         for foto in tablaFotos:
             decodificada = foto.base.decode('utf-8')
             decodificadas.append(decodificada)
+        
+        uno = decodificadas[0]
+        decodificadas.pop(0)
 
-        return render(request, 'carrusel.html', {'decodificadas':decodificadas})
+        return render(request, 'carrusel.html', {'decodificadas':decodificadas, 'uno':uno})
 
     def img(request):
         tablaFotos = tablaImagenes.objects.all()

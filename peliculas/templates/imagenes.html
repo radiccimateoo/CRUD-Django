@@ -48,9 +48,11 @@
     <h4 class="text-center display-4 my-4">Convertir imágen a Base64</h4>
     <form action="{% url 'conversion' %}" method="get">
         <div class="mb-3">
-            <label for="foto" class="form-label">Escriba el directorio donde se encuentra su foto</label>
+            <label for="foto" class="form-label">Escriba el directorio donde se encuentra su foto
+                (el archivo tiene que ser con extensión .png)
+            </label>
             <input type="text" class="form-control" id="foto" name="imagen"
-            placeholder="ej: c:/Users/Desktop/imagenes/imagen.jpg"> <br>
+            placeholder="ej: c:/Users/Desktop/imagenes/imagen.png"> <br>
             <button type="submit" class="btn btn-success">Convertir</button>
         </div>
     </form>

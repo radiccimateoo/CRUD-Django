@@ -21,12 +21,14 @@
                 <th scope="col">Apellido</th>
                 <th scope="col">DNI</th>
                 <th scope="col">Nacimiento</th>
-                <th scope="col">Sueldo Mensual</th>
+                <th scope="col">Sueldo</th>
                 <th scope="col">Editar</th>
                 <th scope="col">Eliminar</th>
-                <th scope="col">Sueldo Anual</th>
-                <th scope="col">Edad actual</th>
-                <th scope="col">Incrementar sueldo</th>
+                <th scope="col">Anual</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Incre-</th>
+                <th scope="col">mentar-</th>
+                <th scope="col">sueldo</th>
             </tr>
         </thead>
         <tbody>
@@ -41,8 +43,8 @@
 
                 <td> <a class="btn btn-warning" href="{% url 'editar' persona.id%}">Editar</a> </td>
                 <td> <a class="btn btn-danger" href="{% url 'eliminar' persona.id %}">Eliminar</a> </td>
-                <td> <a href="{% url 'anual' persona.sueldo_mensual %}" class="btn btn-secondary">Mostrar</a> </td>
-                <td> <a href="{% url 'edadActual' persona.nacimiento.year %}" class="btn btn-dark">Mostar</a></td>
+                <td> <a href="{% url 'anual' persona.sueldo_mensual %}" class="btn btn-secondary">Ver</a> </td>
+                <td> <a href="{% url 'edadActual' persona.nacimiento.year %}" class="btn btn-dark">Ver</a></td>
                 <td> <a href="{% url 'actualizarSueldo' persona.id persona.sueldo_mensual 10 %}" class="btn btn-primary">10%</a></td>
                 <td> <a href="{% url 'actualizarSueldo' persona.id persona.sueldo_mensual 15 %}" class="btn btn-primary">15%</a></td>
                 <td> <a href="{% url 'actualizarSueldo' persona.id persona.sueldo_mensual 20 %}" class="btn btn-primary">20%</a></td>
